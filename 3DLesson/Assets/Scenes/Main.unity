@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 192981835}
   - component: {fileID: 192981834}
   m_Layer: 5
-  m_Name: Text
+  m_Name: WEaponName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -574,8 +574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d33f2d59a321434eb2fe4b6a8ccb070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  Transform: {fileID: 0}
   _speed: 10
   _batteryChargeMax: 10
 --- !u!1 &700217849
@@ -1095,7 +1093,7 @@ GameObject:
   - component: {fileID: 1338123871}
   - component: {fileID: 1338123870}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,7 +1259,7 @@ GameObject:
   - component: {fileID: 1659817799}
   - component: {fileID: 1659817798}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Instrustions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1939,7 +1937,7 @@ GameObject:
   - component: {fileID: 2111875652}
   - component: {fileID: 2111875651}
   m_Layer: 5
-  m_Name: Image
+  m_Name: RedDot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
