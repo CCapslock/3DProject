@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using static UnityEngine.Random;
 
 namespace Geekbrains
 {
@@ -12,11 +11,8 @@ namespace Geekbrains
         public float BatteryChargeCurrent { get; set; }
         [SerializeField] private float _speed = 11;
         public float _batteryChargeMax;
-		private float _share;
-		private float _takeAwayTheIntensity;
-		 
 
-		protected override void Awake()
+        protected override void Awake()
         {
             base.Awake();
             _light = GetComponent<Light>();
@@ -51,35 +47,14 @@ namespace Geekbrains
                 _goFollow.rotation, _speed * Time.deltaTime);
         }
 
-		public bool EditBatteryCharge()
-		{
-			if (BatteryChargeCurrent > 0)
-			{
-				BatteryChargeCurrent -= Time.deltaTime;
-
-				if (BatteryChargeCurrent < _share)
-				{
-					_light.enabled = Range(0, 100) >= Range(0, 10);
-				}
-				else
-				{
-					_light.intensity -= _takeAwayTheIntensity;
-				}
-				return true;
-			}
-
-			return false;
-		}
-		public bool IsBatteryRecharged()
-		{
-			if (BatteryChargeCurrent < _batteryChargeMax)
-			{
-				BatteryChargeCurrent += Time.deltaTime;
-
-				return false;
-			}
-
-			return true;
-		}
-	}
+        public bool EditBatteryCharge()
+        {
+            if (BatteryChargeCurrent > 0)
+            {
+                BatteryChargeCurrent -= Time.deltaTime;
+                return true;
+            }
+            return false;
+        }
+    }
 }

@@ -21,6 +21,7 @@ namespace Geekbrains
 			if (_flashLightModel.BatteryChargeCurrent <= 0) return;
 			base.On();
 			_flashLightModel.Switch(FlashLightActiveType.On);
+			//_flashLightUi.SetActive(true);
 		}
 
 		public override void Off()
@@ -28,24 +29,27 @@ namespace Geekbrains
 			if (!IsActive) return;
 			base.Off();
 			_flashLightModel.Switch(FlashLightActiveType.Off);
+			//_flashLightUi.SetActive(false);
 		}
 
 		public void Execute()
 		{
 			_flashLightUi.SliderCurrentValue = _flashLightModel.BatteryChargeCurrent;
-			if(!IsActive && _flashLightModel.IsBatteryRecharged())
+			if (!IsActive)
 			{
+				if (_flashLightModel.BatteryChargeCurrent < 10)
+				{
+					_flashLightModel.BatteryChargeCurrent += Time.deltaTime;
+
+				}
 				return;
 			}
-			else if (!IsActive && !_flashLightModel.IsBatteryRecharged())
-			{
-				return;
-			}
+			_flashLightModel.Rotation();
+
 			if (!_flashLightModel.EditBatteryCharge())
 			{
 				Off();
 			}
-			_flashLightModel.Rotation();
 		}
 	}
 }

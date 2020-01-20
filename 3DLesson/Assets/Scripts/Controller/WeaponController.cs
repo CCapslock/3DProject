@@ -5,7 +5,7 @@ namespace Geekbrains
 	sealed public class WeaponController : IInitialization, IExecute
 	{
 		private GameObject[] _weapons;
-		private Renderer _weapon;
+		private MeshRenderer _weapon;
 		private WeaponUi _weaponUi;
 
 		private int _currentNumOfWeapon = 0;
@@ -17,10 +17,10 @@ namespace Geekbrains
 		public void Initialization()
 		{
 			_weaponUi = Object.FindObjectOfType<WeaponUi>();
-			_weapons = GameObject.FindGameObjectsWithTag(TagManager.WEAPON);
-			WriteCurrentWeapon();
+			_weapons = GameObject.FindGameObjectsWithTag("Weapon");
 			_maxAmountOfWeapons = _weapons.Length;
 			OffMeshRenderer();
+			_currentNumOfWeapon++;
 		}
 		public void ChangeWeapon()
 		{
@@ -28,32 +28,26 @@ namespace Geekbrains
 			{
 				_currentNumOfWeapon++;
 				OffMeshRenderer();
-
 			}
 			else if (_currentNumOfWeapon == _maxAmountOfWeapons - 1)
 			{
 				_currentNumOfWeapon = 0;
 				OffMeshRenderer();
-
 			}
-			WriteCurrentWeapon();
 		}
 		//делает невидемыми все оружие и потом делает видимым только одно
 		public void OffMeshRenderer()
 		{
+
 			for (int i = 0; i < _maxAmountOfWeapons; i++)
 			{
-				_weapon = _weapons[i].GetComponent<Renderer>();
+				_weapon = _weapons[i].GetComponent<MeshRenderer>();
 				_weapon.enabled = false;
 			}
-			_weapon = _weapons[_currentNumOfWeapon].GetComponent<Renderer>();
+			_weapon = _weapons[_currentNumOfWeapon].GetComponent<MeshRenderer>();
 			_weapon.enabled = true;
 		}
 		public void Execute()
-		{
-		}
-
-		private void WriteCurrentWeapon()
 		{
 			_weaponUi.Text = _weapons[_currentNumOfWeapon].name;
 		}
