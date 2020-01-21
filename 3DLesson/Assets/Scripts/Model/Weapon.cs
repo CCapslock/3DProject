@@ -28,6 +28,8 @@ namespace Geekbrains
 			}
 			
 			ReloadClip();
+
+		    
 		}
 
 		public abstract void Fire();

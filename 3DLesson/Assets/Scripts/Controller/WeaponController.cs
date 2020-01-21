@@ -4,15 +4,16 @@ namespace Geekbrains
 {
 	sealed public class WeaponController : BaseController
 	{
-		private GameObject[] _weapons;
-		private MeshRenderer _weaponmy;
 		private WeaponAmunitionUi _weaponAmunitionUi;
+		private WeaponUi _weaponUi;
 
 		private Weapon _weapon;
 
+        /*private GameObject[] _weapons; //первый способ реализации смены оружия
+		private MeshRenderer _weaponmy;
 		private int _currentNumOfWeapon = 0;
 		private int _maxAmountOfWeapons;
-		private bool _isWeaponActive;
+		private bool _isWeaponActive;*/
 
 		public override void On(params BaseObjectScene[] weapon)
 		{
@@ -20,6 +21,7 @@ namespace Geekbrains
 			if (weapon.Length > 0) _weapon = weapon[0] as Weapon;
 			if (_weapon == null) return;
 			base.On(_weapon);
+			_weaponUi = GameObject.FindObjectOfType<WeaponUi>();
 			_weapon.IsVisible = true;
 			_weaponAmunitionUi.SetActive(true);
 			_weaponAmunitionUi.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
@@ -39,6 +41,13 @@ namespace Geekbrains
 			_weapon.Fire();
 			_weaponAmunitionUi.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
 		}
+
+		//TODO впихнуть куда нибудь вывод названия оружия
+		public void SetWeaponName(string weaponName)
+		{
+			_weaponUi.Text = weaponName;
+		}
+
 
 		//Первый способ смены оружия
 		// находит все оружие и делает видимым только первое
