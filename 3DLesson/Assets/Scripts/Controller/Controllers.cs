@@ -24,16 +24,13 @@ namespace Geekbrains
             ServiceLocator.SetService(new PlayerController(motor));
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
-			ServiceLocator.SetService(new WeaponController());
-			_executeControllers = new IExecute[4];
+			_executeControllers = new IExecute[3];
 
             _executeControllers[0] = ServiceLocator.Resolve<PlayerController>();
 
             _executeControllers[1] = ServiceLocator.Resolve<FlashLightController>();
 
             _executeControllers[2] = ServiceLocator.Resolve<InputController>();
-
-			_executeControllers[3] = ServiceLocator.Resolve<WeaponController>();
 		}
         
         public IExecute this[int index] => _executeControllers[index];

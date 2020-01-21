@@ -14,10 +14,10 @@ namespace Geekbrains
             {
                 ServiceLocator.Resolve<FlashLightController>().Switch();
             }
-			else if (Input.GetKeyDown(_changeWeapon))
+			/*else if (Input.GetKeyDown(_changeWeapon))//первый способ смены оружия
 			{
 				ServiceLocator.Resolve<WeaponController>().ChangeWeapon();
-			}
+			}*/
 		}
     }
 }

@@ -3,16 +3,21 @@ using UnityEngine.UI;
 
 namespace Geekbrains
 {
-	public class WeaponUi : MonoBehaviour
+	public sealed class WeaponUi : MonoBehaviour
 	{
-		private Text _text;
+		private Text _currentWeapontext;
 		private void Awake()
 		{
-			_text = GetComponent<Text>();
+			_currentWeapontext = GetComponent<Text>();
 		}
 		public string Text
 		{
-			set => _text.text = "Current Weapon :" + value;
+			set => _currentWeapontext.text = "Current Weapon :" + value;
+		}
+
+		public void SetActive(bool value)
+		{
+			_currentWeapontext.gameObject.SetActive(value);
 		}
 	}
 
