@@ -48,6 +48,7 @@ namespace Geekbrains
 		{
 			if (CountClip <= 0) return;
 			Clip = _clips.Dequeue();
+
 		}
 		public int CountClip => _clips.Count;
 	}

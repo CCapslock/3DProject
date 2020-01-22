@@ -6,7 +6,12 @@ namespace Geekbrains
     {
         private void OnCollisionEnter(Collision collision)
         {
-            DestroyAmmunition();
+			var tempObj = collision.gameObject.GetComponent<ISetDamage>();
+			if(tempObj != null)
+			{
+				tempObj.SetDamage(_curDamage);
+			}
+			DestroyAmmunition();
         }
     }
 }
