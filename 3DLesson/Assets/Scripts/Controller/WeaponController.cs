@@ -22,6 +22,7 @@ namespace Geekbrains
 			if (_weapon == null) return;
 			base.On(_weapon);
 			_weaponUi = GameObject.FindObjectOfType<WeaponUi>();
+			_weaponAmunitionUi = GameObject.FindObjectOfType<WeaponAmunitionUi>();
 			_weapon.IsVisible = true;
 			_weaponAmunitionUi.SetActive(true);
 			_weaponAmunitionUi.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
@@ -33,12 +34,18 @@ namespace Geekbrains
 			base.Off();
 			_weapon.IsVisible = false;
 			_weapon = null;
-			_weaponAmunitionUi.SetActive(false);
+			//_weaponAmunitionUi.SetActive(false);
 		}
 
 		public void Fire()
 		{
 			_weapon.Fire();
+			_weaponAmunitionUi.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
+		}
+
+		public void ReloadWeapon()
+		{
+			_weapon.ReloadClip();
 			_weaponAmunitionUi.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
 		}
 
