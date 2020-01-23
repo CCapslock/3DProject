@@ -9,7 +9,7 @@ namespace Geekbrains
 		public float Hp = 100;
 		public float TimeOfEnemyUi = (1.5f);
 		private Renderer _renderer;
-		public EnemyHpUi _enemyHpUi;
+		private EnemyHpUi _enemyHpUi;
         private bool _isDead;
 
 		private void Start()

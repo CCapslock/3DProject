@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-//
-
 namespace Geekbrains
 {
 	public sealed class InputController : BaseController, IExecute
@@ -31,11 +29,6 @@ namespace Geekbrains
 			if (Input.GetKeyDown(_reloadClip))
 			{
 				ServiceLocator.Resolve<WeaponController>().ReloadWeapon();
-			}
-
-			else if (Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				SelectWeapon(0);
 			}
 
 			if (Input.GetMouseButton(_mouseButton))
@@ -69,20 +62,16 @@ namespace Geekbrains
 					ServiceLocator.Resolve<WeaponController>().Off();
 				}
 			}
-			CustumDebug.Log(_currentWeapon);
 		}
 
 		private void SetCurrentWeapon()
 		{
 			if (_mouseScroll != 0)
 			{
+				int amountOfWeapon = ServiceLocator.Resolve<Inventory>().Weapons.Length;
 				if (_mouseScroll > 0)
 				{
-					if (_currentWeapon == ServiceLocator.Resolve<Inventory>().Weapons.Length - 1)
-					{
-						return;
-					}
-					else if (_currentWeapon < ServiceLocator.Resolve<Inventory>().Weapons.Length - 1)
+					if (_currentWeapon < amountOfWeapon - 1)
 					{
 						_currentWeapon++;
 						_weaponIsSelected = false;
@@ -90,11 +79,7 @@ namespace Geekbrains
 				}
 				if (_mouseScroll < 0)
 				{
-					if (_currentWeapon == -1)
-					{
-						return;
-					}
-					else if (_currentWeapon > -1)
+					if (_currentWeapon > -1)
 					{
 						_currentWeapon--;
 						_weaponIsSelected = false;
