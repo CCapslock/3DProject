@@ -9,8 +9,10 @@ namespace Geekbrains
 		private KeyCode _activeFlashLight = KeyCode.F;
 		private KeyCode _cancel = KeyCode.Escape;
 		private KeyCode _reloadClip = KeyCode.R;
+		private float _mouseScroll;
 		private int _mouseButton = (int)MouseButton.LeftButton;
 		private int _currentWeapon = -1;
+		private bool _weaponIsSelected = true;
 
 		public InputController()
 		{
@@ -20,16 +22,17 @@ namespace Geekbrains
 		public void Execute()
 		{
 			if (!IsActive) return;
+
 			if (Input.GetKeyDown(_activeFlashLight))
 			{
 
 			}
-			//todo реализовать выбор оружия по колесику мыши
 
 			if (Input.GetKeyDown(_reloadClip))
 			{
 				ServiceLocator.Resolve<WeaponController>().ReloadWeapon();
 			}
+
 			else if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
 				SelectWeapon(0);
@@ -50,12 +53,55 @@ namespace Geekbrains
 				_currentWeapon = -1;
 			}
 
-			/*if (Input.GetKeyDown(_reloadClip))
-            {
-                ServiceLocator.Resolve<WeaponController>().ReloadClip();
-            }*/
+			_mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+
+			SetCurrentWeapon();
+
+			if (!_weaponIsSelected)
+			{
+				if (_currentWeapon != -1)
+				{
+					SelectWeapon(_currentWeapon);
+					_weaponIsSelected = true;
+				}
+				else
+				{
+					ServiceLocator.Resolve<WeaponController>().Off();
+				}
+			}
+			CustumDebug.Log(_currentWeapon);
 		}
 
+		private void SetCurrentWeapon()
+		{
+			if (_mouseScroll != 0)
+			{
+				if (_mouseScroll > 0)
+				{
+					if (_currentWeapon == ServiceLocator.Resolve<Inventory>().Weapons.Length - 1)
+					{
+						return;
+					}
+					else if (_currentWeapon < ServiceLocator.Resolve<Inventory>().Weapons.Length - 1)
+					{
+						_currentWeapon++;
+						_weaponIsSelected = false;
+					}
+				}
+				if (_mouseScroll < 0)
+				{
+					if (_currentWeapon == -1)
+					{
+						return;
+					}
+					else if (_currentWeapon > -1)
+					{
+						_currentWeapon--;
+						_weaponIsSelected = false;
+					}
+				}
+			}
+		}
 
 		/// <summary>
 		/// Выбор оружия
@@ -63,15 +109,11 @@ namespace Geekbrains
 		/// <param name="i">Номер оружия</param>
 		private void SelectWeapon(int i)
 		{
-			if (_currentWeapon != i)
+			var tempWeapon = ServiceLocator.Resolve<Inventory>().Weapons[i]; //todo инкапсулировать
+			ServiceLocator.Resolve<WeaponController>().Off();
+			if (tempWeapon != null)
 			{
-				_currentWeapon = i;
-				var tempWeapon = ServiceLocator.Resolve<Inventory>().Weapons[i]; //todo инкапсулировать
-				ServiceLocator.Resolve<WeaponController>().Off();
-				if (tempWeapon != null)
-				{
-					ServiceLocator.Resolve<WeaponController>().On(tempWeapon);
-				}
+				ServiceLocator.Resolve<WeaponController>().On(tempWeapon);
 			}
 		}
 	}

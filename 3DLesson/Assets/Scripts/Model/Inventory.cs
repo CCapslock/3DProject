@@ -4,7 +4,7 @@ namespace Geekbrains
 {
 	public sealed class Inventory : IInitialization
 	{
-		private Weapon[] _weapons = new Weapon[5];
+		private Weapon[] _weapons;
 
 		public Weapon[] Weapons => _weapons;
 
