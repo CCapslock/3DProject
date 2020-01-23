@@ -3,32 +3,57 @@ using UnityEngine;
 
 namespace Geekbrains
 {
-    public sealed class Aim : MonoBehaviour, ISetDamage
+    public class Aim : MonoBehaviour, ISetDamage
     {
-        public event Action OnPointChange;
-		
-        public float Hp = 100;
+		public GameObject _deathParticleSystem;
+		public float Hp = 100;
+		public float TimeOfEnemyUi = (1.5f);
+		private Renderer _renderer;
+		public EnemyHpUi _enemyHpUi;
         private bool _isDead;
-        //todo дописать поглащение урона
-        public void SetDamage(float info)
+
+		private void Start()
+		{
+			_enemyHpUi = GetComponentInChildren<EnemyHpUi>();
+			_enemyHpUi.SliderMaxValue = Hp;
+			OffUi();
+		}
+
+		public void SetDamage(float info)
         {
             if (_isDead) return;
             if (Hp > 0)
             {
-                Hp -= info;
+				OnUi();
+				Hp -= info;
+				_enemyHpUi.SliderCurrentValue = Hp;
+				Invoke("OffUi", TimeOfEnemyUi);
+                
             }
 
             if (Hp <= 0)
             {
-                Destroy(gameObject);
-
-                OnPointChange?.Invoke();
+				OffUi();
+				Instantiate(_deathParticleSystem, transform.position, Quaternion.identity);
+				_renderer = GetComponent<Renderer>();
+				_renderer.enabled = false;
+				Destroy(gameObject, 4);
                 _isDead = true;
+				
             }
 			CustumDebug.Log(Hp);
         }
+		 
+		private void OnUi()
+		{
+			_enemyHpUi.SwitchUi(EnemyUiActiveType.On);
+		}
+		private void OffUi()
+		{
+			_enemyHpUi.SwitchUi(EnemyUiActiveType.Off);
+		}
 
-        public string GetMessage()
+		public string GetMessage()
         {
             return gameObject.name;
         }
