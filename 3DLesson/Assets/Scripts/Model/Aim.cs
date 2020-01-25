@@ -37,11 +37,10 @@ namespace Geekbrains
 				Instantiate(_deathParticleSystem, transform.position, Quaternion.identity);
 				_renderer = GetComponent<Renderer>();
 				_renderer.enabled = false;
-				Destroy(gameObject, 4);
+				Destroy(gameObject);
                 _isDead = true;
 				
             }
-			CustumDebug.Log(Hp);
         }
 		 
 		private void OnUi()
