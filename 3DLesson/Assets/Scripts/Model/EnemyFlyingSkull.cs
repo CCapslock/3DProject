@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Geekbrains
 {
 	public class EnemyFlyingSkull : BaseObjectScene
 	{
-		[SerializeField] private NavMeshAgent _enemyAi;
+		[SerializeField] private AICharacterControl _enemyAi;
+		[SerializeField] private NavMeshAgent _agent;
 		[SerializeField] private Transform _playerTransform;
 		[SerializeField] private float _calculatedDistance;
 
@@ -13,7 +15,8 @@ namespace Geekbrains
 		private void Start()
 		{
 			_playerTransform = GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform;
-			_enemyAi = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+			_agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+			_enemyAi = GetComponent<AICharacterControl>();
 		}
 		private void Update()
 		{
@@ -21,10 +24,13 @@ namespace Geekbrains
 			if (_calculatedDistance <= KeepDistanceOfPlayer)
 			{
 				_enemyAi.enabled = false;
+				_agent.enabled = false;
 			}
 			else
 			{
 				_enemyAi.enabled = true;
+				_agent.enabled = true;
+
 			}
 		}
 		private void CalculateDistance()
