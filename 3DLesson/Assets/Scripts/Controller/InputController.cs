@@ -94,6 +94,7 @@ namespace Geekbrains
 		/// <param name="i">Номер оружия</param>
 		private void SelectWeapon(int i)
 		{
+			CustumDebug.Log("yeahhh");
 			var tempWeapon = ServiceLocator.Resolve<Inventory>().Weapons[i]; //todo инкапсулировать
 			ServiceLocator.Resolve<WeaponController>().Off();
 			if (tempWeapon != null)

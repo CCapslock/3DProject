@@ -9,6 +9,7 @@ namespace Geekbrains
 
 		public void Initialization()
 		{
+
 			_flashLightModel = Object.FindObjectOfType<FlashLightModel>();
 			_flashLightUi = Object.FindObjectOfType<FlashLightUi>();
 			_flashLightUi.SliderMaxValue = _flashLightModel._batteryChargeMax;
@@ -21,7 +22,6 @@ namespace Geekbrains
 			if (_flashLightModel.BatteryChargeCurrent <= 0) return;
 			base.On();
 			_flashLightModel.Switch(FlashLightActiveType.On);
-			//_flashLightUi.SetActive(true);
 		}
 
 		public override void Off()
@@ -29,7 +29,6 @@ namespace Geekbrains
 			if (!IsActive) return;
 			base.Off();
 			_flashLightModel.Switch(FlashLightActiveType.Off);
-			//_flashLightUi.SetActive(false);
 		}
 
 		public void Execute()

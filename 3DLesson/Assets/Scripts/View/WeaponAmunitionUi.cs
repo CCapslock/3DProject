@@ -5,7 +5,7 @@ namespace Geekbrains
 {
 	public sealed class WeaponAmunitionUi : MonoBehaviour
 	{
-		private Text _text;
+		[SerializeField] private Text _text;
 
 		private void Awake()
 		{

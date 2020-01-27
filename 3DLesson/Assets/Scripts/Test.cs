@@ -6,7 +6,7 @@ namespace Geekbrains
     {
         private void Start()
         {
-            FindObjectOfType<FlashLightModel>().Layer = 2;
+            //FindObjectOfType<FlashLightModel>().Layer = 2;
         }
     }
 }

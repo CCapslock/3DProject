@@ -5,9 +5,9 @@ namespace Geekbrains
 {
     public sealed class FlashLightModel : BaseObjectScene
     {
-        private Light _light;
-        private Transform _goFollow;
-        private Vector3 _vecOffset;
+		[SerializeField] private Light _light;
+		[SerializeField] private Transform _goFollow;
+		[SerializeField] private Vector3 _vecOffset;
         public float BatteryChargeCurrent { get; set; }
         [SerializeField] private float _speed = 11;
         public float _batteryChargeMax;

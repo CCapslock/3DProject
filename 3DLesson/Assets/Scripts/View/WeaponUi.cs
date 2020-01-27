@@ -5,7 +5,7 @@ namespace Geekbrains
 {
 	public sealed class WeaponUi : MonoBehaviour
 	{
-		private Text _currentWeapontext;
+		[SerializeField] private Text _currentWeapontext;
 		private void Awake()
 		{
 			_currentWeapontext = GetComponent<Text>();

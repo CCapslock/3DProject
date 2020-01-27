@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace Geekbrains
 {
-	public class EnemyFlyingSkull : BaseObjectScene
+	public sealed class EnemyFlyingSkull : BaseObjectScene
 	{
 		[SerializeField] private AICharacterControl _enemyAi;
 		[SerializeField] private NavMeshAgent _agent;

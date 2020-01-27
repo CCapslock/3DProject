@@ -5,8 +5,8 @@ namespace Geekbrains
 {
 	public class EnemyHpUi : MonoBehaviour
 	{
-		private Slider _slider;
-		private Canvas _canvas;
+		[SerializeField] private Slider _slider;
+		[SerializeField] private Canvas _canvas;
 		private void Awake()
 		{
 			_slider = GetComponentInChildren<Slider>();

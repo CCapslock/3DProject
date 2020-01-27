@@ -20,8 +20,8 @@ namespace Geekbrains
 				weapon.IsVisible = false;
 			}
 
-			FlashLight = Object.FindObjectOfType<FlashLightModel>();
-			FlashLight.Switch(FlashLightActiveType.Off);
+			//FlashLight = Object.FindObjectOfType<FlashLightModel>();
+			//FlashLight.Switch(FlashLightActiveType.Off);
 		}
 
 		//todo Добавить функционал

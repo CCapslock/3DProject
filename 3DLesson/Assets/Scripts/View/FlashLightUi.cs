@@ -5,7 +5,7 @@ namespace Geekbrains
 {
     public sealed class FlashLightUi : MonoBehaviour
     {
-        private Slider _slider;
+		[SerializeField] private Slider _slider;
         // image
 
         private void Awake()

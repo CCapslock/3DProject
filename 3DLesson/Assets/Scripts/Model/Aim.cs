@@ -3,14 +3,17 @@ using UnityEngine;
 
 namespace Geekbrains
 {
-    public class Aim : MonoBehaviour, ISetDamage
-    {
+	public class Aim : MonoBehaviour, ISetDamage
+	{
+		[SerializeField] private Renderer _renderer;
+		[SerializeField] private EnemyHpUi _enemyHpUi;
+		[SerializeField] private bool _isDead;
+
 		public GameObject _deathParticleSystem;
 		public float Hp = 100;
 		public float TimeOfEnemyUi = (1.5f);
-		private Renderer _renderer;
-		private EnemyHpUi _enemyHpUi;
-        private bool _isDead;
+
+
 
 		private void Start()
 		{
@@ -20,29 +23,29 @@ namespace Geekbrains
 		}
 
 		public void SetDamage(float info)
-        {
-            if (_isDead) return;
-            if (Hp > 0)
-            {
+		{
+			if (_isDead) return;
+			if (Hp > 0)
+			{
 				OnUi();
 				Hp -= info;
 				_enemyHpUi.SliderCurrentValue = Hp;
 				Invoke("OffUi", TimeOfEnemyUi);
-                
-            }
 
-            if (Hp <= 0)
-            {
+			}
+
+			if (Hp <= 0)
+			{
 				OffUi();
 				Instantiate(_deathParticleSystem, transform.position, Quaternion.identity);
 				_renderer = GetComponent<Renderer>();
 				_renderer.enabled = false;
 				Destroy(gameObject);
-                _isDead = true;
-				
-            }
-        }
-		 
+				_isDead = true;
+
+			}
+		}
+
 		private void OnUi()
 		{
 			_enemyHpUi.SwitchUi(EnemyUiActiveType.On);
@@ -53,8 +56,8 @@ namespace Geekbrains
 		}
 
 		public string GetMessage()
-        {
-            return gameObject.name;
-        }
-    }
+		{
+			return gameObject.name;
+		}
+	}
 }
